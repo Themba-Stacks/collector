@@ -4,6 +4,14 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { testServiceClient } from './services/test-service/test-service.shared'
+export type {
+  TestService,
+  TestServiceData,
+  TestServiceQuery,
+  TestServicePatch
+} from './services/test-service/test-service.shared'
+
 export interface Configuration {
   connection: TransportConnection<ServiceTypes>
 }
@@ -30,5 +38,6 @@ export const createClient = <Configuration = any,>(
   client.configure(authenticationClient(authenticationOptions))
   client.set('connection', connection)
 
+  client.configure(testServiceClient)
   return client
 }

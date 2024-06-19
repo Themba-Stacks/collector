@@ -11,6 +11,9 @@
   },
   "postgresql": {
     "client": "pg",
-    "connection": "postgres://collector:13Collector13@localhost:5432/collector"
+    "connection": "postgres://postgresUser@2345:postgresPassword@5432@localhost:5432/collector",
+    "connect": "postgres://collector:13Collector13@localhost:5432/collector"
+
   }
 }
+
