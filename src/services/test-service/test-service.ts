@@ -16,6 +16,7 @@ import {
 import type { Application } from '../../declarations'
 import { TestServiceService, getOptions } from './test-service.class'
 import { testServicePath, testServiceMethods } from './test-service.shared'
+import { logRuntime } from '../../hooks/log-runtime'
 
 export * from './test-service.class'
 export * from './test-service.schema'
@@ -34,7 +35,8 @@ export const testService = (app: Application) => {
     around: {
       all: [
         schemaHooks.resolveExternal(testServiceExternalResolver),
-        schemaHooks.resolveResult(testServiceResolver)
+        schemaHooks.resolveResult(testServiceResolver),
+        logRuntime
       ]
     },
     before: {

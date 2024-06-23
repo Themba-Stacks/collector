@@ -4,6 +4,9 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { lottoClient } from './services/lotto/lotto.shared'
+export type { Lotto, LottoData, LottoQuery, LottoPatch } from './services/lotto/lotto.shared'
+
 import { testServiceClient } from './services/test-service/test-service.shared'
 export type {
   TestService,
@@ -39,5 +42,6 @@ export const createClient = <Configuration = any,>(
   client.set('connection', connection)
 
   client.configure(testServiceClient)
+  client.configure(lottoClient)
   return client
 }
