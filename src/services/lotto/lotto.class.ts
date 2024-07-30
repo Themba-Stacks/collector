@@ -5,6 +5,8 @@ import type { KnexAdapterParams, KnexAdapterOptions } from '@feathersjs/knex'
 
 import type { Application } from '../../declarations'
 import type { Lotto, LottoData, LottoPatch, LottoQuery } from './lotto.schema'
+import axios from 'axios';
+
 
 export type { Lotto, LottoData, LottoPatch, LottoQuery }
 
@@ -18,7 +20,27 @@ export class LottoService<ServiceParams extends Params = LottoParams> extends Kn
   LottoPatch
 > {
   async getLottoResults() {
-    return {message: 'this is a test message'}
+    const data = 'gameName=LOTTO&drawNumber=2446&isAjax=true';
+
+    const config = {
+      method: 'post',
+      url: 'https://www.nationallottery.co.za/index.php?task=results.redirectPageURL&amp;Itemid=265&amp;option=com_weaver&amp;controller=lotto-history',
+      headers: { 
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', 
+        'origin': 'https://www.nationallottery.co.za'
+      },
+      data : data
+    };
+
+    const response = await axios(config)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+    return response;
   }
 }
 
